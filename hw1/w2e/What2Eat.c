@@ -7,6 +7,11 @@ int main()
     printf("Number of people: ");
     scanf("%d", &nPeople);
 
+    if(nPeople <= 1)
+    {
+        printf("You have to be more than 1 people to play this game.\n");
+        return 0;
+    }
     int threshold = nPeople / 2;
     int selectionCount[5] = {0, 0, 0, 0, 0};
     int passedThreshold[5] = {0, 0, 0, 0, 0};
@@ -43,16 +48,26 @@ int main()
         return 0;
     }
 
-    printf("---SECOND ROUND STARTED---\n");
-    int newSelectionCount[counter];
-    for(int idx=0; idx < counter; ++idx)
-    {
-        newSelectionCount[idx] = 0;
+    if(counter == 1){
+        int maxSelectionCount = 0;
+        int maxSelectionIndex = 0;
+        for(int idx=0; idx<5; ++idx){
+            if(selectionCount[idx] > maxSelectionCount)
+            {
+                maxSelectionCount = selectionCount[idx];
+                maxSelectionIndex = idx;
+            }
+        }
+        printf("You are eating %s today!\n", foods[maxSelectionIndex]);
+        return 0;
     }
+
+    printf("---SECOND ROUND STARTED---\n");
+    int newSelectionCount[5] = {0, 0, 0, 0, 0};
 
     const char* newFoods[counter];
     int x=0;
-    for(int idx=0; idx<counter; ++idx)
+    for(int idx=0; idx<5; ++idx)
     {
         if(passedThreshold[idx])
         {
@@ -61,7 +76,7 @@ int main()
         }
     }
 
-    for(int idx = 0; idx < sizeof(newFoods) / sizeof(newFoods[0]); idx++)
+    for(int idx=0; idx<(sizeof(newFoods) / sizeof(newFoods[0])); ++idx)
     {
         printf("%d-%s\n", idx+1, newFoods[idx]);
     }
@@ -73,6 +88,23 @@ int main()
         scanf("%d", &selection);
         newSelectionCount[selection-1]++;
     }
+/*
+    for(int idx=0; idx<counter; ++idx)
+    {
+        printf("%s: %d\n", newFoods[idx], newSelectionCount[idx]);
+    }
+*/
+    int maxVoteIndex = 0;
+    int maxVote = 0;
+
+    for(int idx=0; idx<counter; ++idx)
+    {
+        if(newSelectionCount[idx]>maxVote){
+            maxVote = newSelectionCount[idx];
+            maxVoteIndex = idx;
+        }
+    }
+    printf("You are eating %s today!\n", newFoods[maxVoteIndex]);
 
     return 0;
 }
