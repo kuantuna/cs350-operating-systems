@@ -38,7 +38,6 @@ int main()
         {
             counter++;
             passedThreshold[idx] = 1;
-            printf("%s = %d\n", foods[idx], selectionCount[idx]);
         }
     }
     printf("---FIRST ROUND ENDED---\n\n");
@@ -84,7 +83,7 @@ int main()
     for(int idx = 1; idx <= nPeople; ++idx)
     {
         int selection;
-        printf("Person number %d, What do you prefer to eat? (Please provide an integer bw. 1-5): ", idx);
+        printf("Person number %d, What do you prefer to eat? (Please provide an integer bw. 1-%d): ", idx, counter);
         scanf("%d", &selection);
         newSelectionCount[selection-1]++;
     }
