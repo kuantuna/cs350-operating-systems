@@ -88,12 +88,7 @@ int main()
         scanf("%d", &selection);
         newSelectionCount[selection-1]++;
     }
-/*
-    for(int idx=0; idx<counter; ++idx)
-    {
-        printf("%s: %d\n", newFoods[idx], newSelectionCount[idx]);
-    }
-*/
+
     int maxVoteIndex = 0;
     int maxVote = 0;
 
